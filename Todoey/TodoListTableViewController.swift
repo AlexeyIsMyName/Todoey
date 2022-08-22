@@ -1,5 +1,5 @@
 //
-//  TableViewController.swift
+//  TodoListTableViewController.swift
 //  Todoey
 //
 //  Created by ALEKSEY SUSLOV on 22.08.2022.
@@ -8,7 +8,7 @@
 
 import UIKit
 
-class TableViewController: UITableViewController {
+class TodoListTableViewController: UITableViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
