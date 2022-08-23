@@ -11,36 +11,36 @@ import UIKit
 class TodoListTableViewController: UITableViewController {
     
     var itemArray: [TodoItem] = [
-        TodoItem(name: "Find Mike", isDone: false),
-        TodoItem(name: "Buy Eggos", isDone: false),
-        TodoItem(name: "Destroy Demogorgon", isDone: false),
-        TodoItem(name: "qwe", isDone: false),
-        TodoItem(name: "asdfasdf", isDone: false),
-        TodoItem(name: "q", isDone: false),
-        TodoItem(name: "asdgfasgd", isDone: false),
-        TodoItem(name: "sdfadsg", isDone: false),
-        TodoItem(name: "asdgfasdg", isDone: false),
-        TodoItem(name: "f", isDone: false),
-        TodoItem(name: "q", isDone: false),
-        TodoItem(name: "qw", isDone: false),
-        TodoItem(name: "1", isDone: false),
-        TodoItem(name: "2", isDone: false),
-        TodoItem(name: "3", isDone: false),
-        TodoItem(name: "4", isDone: false),
-        TodoItem(name: "5", isDone: false),
-        TodoItem(name: "6", isDone: false),
-        TodoItem(name: "7", isDone: false),
-        TodoItem(name: "8", isDone: false),
-        TodoItem(name: "9", isDone: false),
-        TodoItem(name: "0", isDone: false),
-        TodoItem(name: "z", isDone: false),
-        TodoItem(name: "x", isDone: false),
-        TodoItem(name: "c", isDone: false),
-        TodoItem(name: "v", isDone: false),
-        TodoItem(name: "b", isDone: false),
-        TodoItem(name: "n", isDone: false),
-        TodoItem(name: "m", isDone: false),
-        TodoItem(name: "asd", isDone: false)
+        TodoItem(title: "Find Mike", isDone: false),
+        TodoItem(title: "Buy Eggos", isDone: false),
+        TodoItem(title: "Destroy Demogorgon", isDone: false),
+        TodoItem(title: "qwe", isDone: false),
+        TodoItem(title: "asdfasdf", isDone: false),
+        TodoItem(title: "q", isDone: false),
+        TodoItem(title: "asdgfasgd", isDone: false),
+        TodoItem(title: "sdfadsg", isDone: false),
+        TodoItem(title: "asdgfasdg", isDone: false),
+        TodoItem(title: "f", isDone: false),
+        TodoItem(title: "q", isDone: false),
+        TodoItem(title: "qw", isDone: false),
+        TodoItem(title: "1", isDone: false),
+        TodoItem(title: "2", isDone: false),
+        TodoItem(title: "3", isDone: false),
+        TodoItem(title: "4", isDone: false),
+        TodoItem(title: "5", isDone: false),
+        TodoItem(title: "6", isDone: false),
+        TodoItem(title: "7", isDone: false),
+        TodoItem(title: "8", isDone: false),
+        TodoItem(title: "9", isDone: false),
+        TodoItem(title: "0", isDone: false),
+        TodoItem(title: "z", isDone: false),
+        TodoItem(title: "x", isDone: false),
+        TodoItem(title: "c", isDone: false),
+        TodoItem(title: "v", isDone: false),
+        TodoItem(title: "b", isDone: false),
+        TodoItem(title: "n", isDone: false),
+        TodoItem(title: "m", isDone: false),
+        TodoItem(title: "asd", isDone: false)
     ]
     
     let defaults = UserDefaults.standard
@@ -65,7 +65,7 @@ class TodoListTableViewController: UITableViewController {
 //        let cell = UITableViewCell(style: .default, reuseIdentifier: "ToDoItemCell")
 
         var content = cell.defaultContentConfiguration()
-        content.text = itemArray[indexPath.row].name
+        content.text = itemArray[indexPath.row].title
         cell.contentConfiguration = content
         
         cell.accessoryType = itemArray[indexPath.row].isDone ? .checkmark : .none

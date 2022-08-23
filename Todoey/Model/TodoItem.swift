@@ -7,6 +7,6 @@
 //
 
 struct TodoItem {
-    let name: String
+    let title: String
     var isDone: Bool
 }
