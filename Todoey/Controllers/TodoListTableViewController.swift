@@ -16,25 +16,9 @@ class TodoListTableViewController: UITableViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         print(dataFilePath)
         
-        let newItem = TodoItem()
-        newItem.title = "Find Mike"
-        itemArray.append(newItem)
-        
-        let newItem2 = TodoItem()
-        newItem2.title = "Buy Eggos"
-        itemArray.append(newItem2)
-        
-        let newItem3 = TodoItem()
-        newItem3.title = "Destroy Demogorgon"
-        itemArray.append(newItem3)
-        
-//        if let items = defaults.array(forKey: "TodoListArray") as? [TodoItem] {
-//            itemArray = items
-//        }
-        
+        loadItems()
     }
 
     // MARK: - Table view data source
@@ -149,6 +133,18 @@ class TodoListTableViewController: UITableViewController {
             try data.write(to: dataFilePath!)
         } catch {
             print("Error encoding item array")
+        }
+    }
+    
+    private func loadItems() {
+        if let data = try? Data(contentsOf: dataFilePath!) {
+            let decoder = PropertyListDecoder()
+            
+            do {
+                itemArray = try decoder.decode([TodoItem].self, from: data)
+            } catch let error {
+                print("Error decoding item array, \(error)")
+            }
         }
     }
 }
