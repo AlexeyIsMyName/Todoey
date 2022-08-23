@@ -6,7 +6,7 @@
 //  Copyright © 2022 App Brewery. All rights reserved.
 //
 
-class TodoItem {
+class TodoItem: Encodable {
     var title: String = ""
     var isDone: Bool = false
 }
