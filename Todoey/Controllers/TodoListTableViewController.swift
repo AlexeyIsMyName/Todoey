@@ -10,43 +10,30 @@ import UIKit
 
 class TodoListTableViewController: UITableViewController {
     
-    var itemArray: [TodoItem] = [
-        TodoItem(title: "Find Mike", isDone: false),
-        TodoItem(title: "Buy Eggos", isDone: false),
-        TodoItem(title: "Destroy Demogorgon", isDone: false),
-        TodoItem(title: "qwe", isDone: false),
-        TodoItem(title: "asdfasdf", isDone: false),
-        TodoItem(title: "q", isDone: false),
-        TodoItem(title: "asdgfasgd", isDone: false),
-        TodoItem(title: "sdfadsg", isDone: false),
-        TodoItem(title: "asdgfasdg", isDone: false),
-        TodoItem(title: "f", isDone: false),
-        TodoItem(title: "q", isDone: false),
-        TodoItem(title: "qw", isDone: false),
-        TodoItem(title: "1", isDone: false),
-        TodoItem(title: "2", isDone: false),
-        TodoItem(title: "3", isDone: false),
-        TodoItem(title: "4", isDone: false),
-        TodoItem(title: "5", isDone: false),
-        TodoItem(title: "6", isDone: false),
-        TodoItem(title: "7", isDone: false),
-        TodoItem(title: "8", isDone: false),
-        TodoItem(title: "9", isDone: false),
-        TodoItem(title: "0", isDone: false),
-        TodoItem(title: "z", isDone: false),
-        TodoItem(title: "x", isDone: false),
-        TodoItem(title: "c", isDone: false),
-        TodoItem(title: "v", isDone: false),
-        TodoItem(title: "b", isDone: false),
-        TodoItem(title: "n", isDone: false),
-        TodoItem(title: "m", isDone: false),
-        TodoItem(title: "asd", isDone: false)
-    ]
+    var itemArray = [TodoItem]()
     
     let defaults = UserDefaults.standard
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        let newItem = TodoItem()
+        newItem.title = "Find Mike"
+        itemArray.append(newItem)
+        
+        let newItem2 = TodoItem()
+        newItem2.title = "Buy Eggos"
+        itemArray.append(newItem2)
+        
+        let newItem3 = TodoItem()
+        newItem3.title = "Destroy Demogorgon"
+        itemArray.append(newItem3)
+        
+        for _ in 0..<100 {
+            let newItem3 = TodoItem()
+            newItem3.title = "Destroy Demogorgon"
+            itemArray.append(newItem3)
+        }
         
 //        if let items = defaults.array(forKey: "TodoListArray") as? [String] {
 //            itemArray = items
@@ -61,8 +48,6 @@ class TodoListTableViewController: UITableViewController {
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "ToDoItemCell", for: indexPath)
-        
-//        let cell = UITableViewCell(style: .default, reuseIdentifier: "ToDoItemCell")
 
         var content = cell.defaultContentConfiguration()
         content.text = itemArray[indexPath.row].title
@@ -140,10 +125,13 @@ class TodoListTableViewController: UITableViewController {
                                    style: .default) { action in
             //what will happen once the user clicks the Add Item button on our UIAlert
             if let text = textField.text, text != "" {
-//                self.itemArray.append(text)
+                
+                let newItem = TodoItem()
+                newItem.title = text
+                
+                self.itemArray.append(newItem)
                 
                 self.defaults.set(self.itemArray, forKey: "TodoListArray")
-                
                 self.tableView.reloadData()
             }
         }

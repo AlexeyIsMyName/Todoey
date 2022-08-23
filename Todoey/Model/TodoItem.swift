@@ -6,7 +6,7 @@
 //  Copyright © 2022 App Brewery. All rights reserved.
 //
 
-struct TodoItem {
-    let title: String
-    var isDone: Bool
+class TodoItem {
+    var title: String = ""
+    var isDone: Bool = false
 }
