@@ -129,8 +129,8 @@ class TodoListTableViewController: UITableViewController {
         let encoder = PropertyListEncoder()
         
         do {
-            let data = try encoder.encode(itemArray)
-            try data.write(to: dataFilePath!)
+//            let data = try encoder.encode(itemArray)
+//            try data.write(to: dataFilePath!)
         } catch {
             print("Error encoding item array")
         }
@@ -141,7 +141,7 @@ class TodoListTableViewController: UITableViewController {
             let decoder = PropertyListDecoder()
             
             do {
-                itemArray = try decoder.decode([TodoItem].self, from: data)
+//                itemArray = try decoder.decode([TodoItem].self, from: data)
             } catch let error {
                 print("Error decoding item array, \(error)")
             }
