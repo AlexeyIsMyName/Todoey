@@ -12,12 +12,13 @@ import CoreData
 class TodoListTableViewController: UITableViewController {
     
     var itemArray = [TodoItem]()
+    
     let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
 
     override func viewDidLoad() {
         super.viewDidLoad()
         print(FileManager.default.urls(for: .documentDirectory, in: .userDomainMask))
-//        loadItems()
+        loadItems()
     }
 
     // MARK: - Table view data source
@@ -77,6 +78,7 @@ class TodoListTableViewController: UITableViewController {
 
     // MARK: - Table view delegate
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        
         itemArray[indexPath.row].isDone.toggle()
         saveItems()
         
@@ -127,7 +129,6 @@ class TodoListTableViewController: UITableViewController {
     }
     
     private func saveItems() {
-        
         do {
             try context.save()
         } catch {
@@ -135,15 +136,13 @@ class TodoListTableViewController: UITableViewController {
         }
     }
     
-//    private func loadItems() {
-//        if let data = try? Data(contentsOf: dataFilePath!) {
-//            let decoder = PropertyListDecoder()
-//
-//            do {
-//                itemArray = try decoder.decode([TodoItem].self, from: data)
-//            } catch let error {
-//                print("Error decoding item array, \(error)")
-//            }
-//        }
-//    }
+    private func loadItems() {
+        let request: NSFetchRequest<TodoItem> = TodoItem.fetchRequest()
+        
+        do {
+            itemArray = try context.fetch(request)
+        } catch {
+            print("Error fetching data from context", error)
+        }
+    }
 }
