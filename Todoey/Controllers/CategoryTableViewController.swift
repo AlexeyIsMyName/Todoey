@@ -17,7 +17,7 @@ class CategoryTableViewController: UITableViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        loadItems()
+        loadCaterories()
     }
     
     
@@ -30,9 +30,7 @@ class CategoryTableViewController: UITableViewController {
         let cell = tableView.dequeueReusableCell(withIdentifier: "CategoryCell", for: indexPath)
         var content = cell.defaultContentConfiguration()
         
-        let category = categoryArray[indexPath.row]
-        
-        content.text = category.name
+        content.text = categoryArray[indexPath.row].name
         cell.contentConfiguration = content
 
         return cell
@@ -41,15 +39,16 @@ class CategoryTableViewController: UITableViewController {
     
     // MARK: - Table view delegate
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        
-        
-        
+        performSegue(withIdentifier: "goToItems", sender: self)
         tableView.deselectRow(at: indexPath, animated: true)
     }
     
     // MARK: - Navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        
+        let destinationVC = segue.destination as! TodoListTableViewController
+        if let indexPath = tableView.indexPathForSelectedRow {
+            destinationVC.selectedCategory = categoryArray[indexPath.row]
+        }
     }
     
     
@@ -67,10 +66,9 @@ class CategoryTableViewController: UITableViewController {
                 let newCategory = TodoCategory(context: self.context)
                 
                 newCategory.name = text
-                
+    
                 self.categoryArray.append(newCategory)
-                self.saveItems()
-                self.tableView.reloadData()
+                self.saveCategories()
             }
         }
         
@@ -84,20 +82,25 @@ class CategoryTableViewController: UITableViewController {
         present(alert, animated: true)
     }
     
-    private func saveItems() {
+    private func saveCategories() {
         do {
             try context.save()
         } catch {
             print("Error saving context \(error)")
         }
+        
+        tableView.reloadData()
     }
     
-    private func loadItems(with request: NSFetchRequest<TodoCategory> = TodoCategory.fetchRequest()) {
+    private func loadCaterories() {
+        let request = TodoCategory.fetchRequest()
+        
         do {
             categoryArray = try context.fetch(request)
         } catch {
             print("Error fetching data from context", error)
         }
+        
         tableView.reloadData()
     }
 }
