@@ -18,15 +18,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 //        print(Realm.Configuration.defaultConfiguration.fileURL)
         
         do {
-            let realm = try Realm()
+            _ = try Realm()
         } catch {
             print("Error Initialazing new Realm")
         }
         
         return true
-    }
-
-    func applicationWillTerminate(_ application: UIApplication) {
-        
     }
 }
