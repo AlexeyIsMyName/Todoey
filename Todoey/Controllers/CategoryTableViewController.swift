@@ -22,6 +22,17 @@ class CategoryTableViewController: SwipeTableViewController {
         tableView.separatorStyle = .none
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        guard let navBar = navigationController?.navigationBar else {
+            fatalError("Navogation Controller does not exist.")
+        }
+        
+        navBar.standardAppearance.backgroundColor = UIColor(hexString: "1D9BF6")
+        navBar.scrollEdgeAppearance?.backgroundColor = UIColor(hexString: "1D9BF6")
+    }
+    
     
     // MARK: - Table view data source
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -33,9 +44,10 @@ class CategoryTableViewController: SwipeTableViewController {
         
         var content = cell.defaultContentConfiguration()
         
-        if let category = categories?[indexPath.row] {
+        if let category = categories?[indexPath.row], let categoryColor = UIColor(hexString: category.color) {
             content.text = category.name
-            cell.backgroundColor = UIColor(hexString: category.color)
+            content.textProperties.color = ContrastColorOf(categoryColor, returnFlat: true)
+            cell.backgroundColor = categoryColor
         } else {
             content.text = "No Categories Added Yet"
         }
